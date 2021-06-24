@@ -1,4 +1,4 @@
-<center> Deploy and Configure  Azure Arc for Servers Using GPO </center>
+# <center>  Deploy and Configure  Azure Arc for Servers Using GPO </center>
 
 <br> </br>
 
@@ -114,7 +114,4 @@ open the schedueled task and configure as following:
         - Start in(optional): C:\
 <p align = "center"> 
      <img src= "Pictures\ST-Actions.jpg">
-</p>
-
- 
-   
+</p
