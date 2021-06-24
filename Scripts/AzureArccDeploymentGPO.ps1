@@ -46,4 +46,4 @@ function Deploy-Agent {
 
     Deploy-Agent
 
-    -ExecutionPolicy Bypass -command "& \\DC-01.Contoso.lcl\Software\Arc\AzureArccDeploymentGPO.ps1"
+  
