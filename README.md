@@ -110,6 +110,7 @@ open the schedueled task and configure as following:
     
         }
     }
+     Deploy-Agent
 </br>
         - Start in(optional): C:\
 <p align = "center"> 
