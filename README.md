@@ -14,7 +14,7 @@ Prepare a remote share to host the Azure Connected Machine agent package for win
 
 Download [Windows agent Windows Installer package](https://aka.ms/AzureConnectedMachineAgent) from the Microsoft Download Center and save it to the remote share.
 
-### Creating  Configuration file
+### Create a Configuration file
 
 The Azure Connected Machine agent uses a json configuration file to provide a consistence configuration experience and ease of at scale deployment. The file structure is as follows:
 
