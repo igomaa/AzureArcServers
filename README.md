@@ -75,6 +75,7 @@ Open the scheduled task and configure as follows:
         - The following is a simple example of how to install and onboard the server to Azure Arc, using the configuration file you created in the previous step.
 <br>
 
+```
 [string] $remotePath = "\\dc-01.contoso.lcl\Software\Arc"
 [string] $localPath = "$env:HOMEDRIVE\ArcDeployment"
 
@@ -115,6 +116,7 @@ function Deploy-Agent {
 }
 
 Deploy-Agent
+```
 
 </br>
         - Start in(optional): C:\
