@@ -1,22 +1,20 @@
-# <center>  Deploy and Configure  Azure Arc for Servers Using GPO </center>
-
-<br> </br>
+# <center>  Deploy and Configure  Azure Arc-enabled Servers Using Group Policy </center>
 
 You can onboard your domain-joined Windows machines to Azure Arc-enabled servers at scale by using a Group Policy Object (GPO). This method requires that you have domain administrator privileges and access to group policy editor. You will also need a remote share to host the latest Azure Arc-enabled servers agent, configuration file, and the installation script.
 
 # Prerequisites
 
-### Distributed location
+### Set up a Remote File Share
 
 Prepare a remote share to host the Azure Connected Machine agent package for windows and the configuration file. You need at least read only access to the distributed location.
 
-### Download the agent
+### Download the Connected Machine Agent
 
 Download [Windows agent Windows Installer package](https://aka.ms/AzureConnectedMachineAgent) from the Microsoft Download Center and save it to the remote share.
 
-### Create a Configuration file
+### Define a Configuration File
 
-The Azure Connected Machine agent uses a json configuration file to provide a consistence configuration experience and ease of at scale deployment. The file structure is as follows:
+The Azure Connected Machine agent uses a json configuration file to provide a consistence configuration experience and ease of at scale deployment. Copy the configuration below into a file, edit with your Azure details, and save in the remote share as "ArcConfig.json". 
 
 ```
     {
@@ -29,18 +27,16 @@ The Azure Connected Machine agent uses a json configuration file to provide a co
     }
 ```
 
-Copy the above the content in a file, edit with your Azure details, and save the file in the remote share as "ArcConfig.json". 
-
-### Create a Group Policy Object
+# Create a Group Policy Object
 
 - Open the Group Policy managment console (GPMC). 
 - Navigate to the location in your AD forest that contains the machines which you would like to join to Azure Arc-enabled servers. Then, right-click and select "Create a GPO in this domain, and Link it here." When prompted, assign a descriptive name to this GPO.
 - Edit the GPO, navigate to the following location:
-  ***Computer Configuration -> Preferences -> Control Panel Settings -> Scheduled Tasks***, right-click in the blank area, ***select New -> Schedueled Task (At least Windows 7)***
+  ***Computer Configuration -> Preferences -> Control Panel Settings -> Scheduled Tasks***, right-click in the blank area, ***select New -> Scheduled Task (At least Windows 7)***
 
-### Create a Scheduled Task
+### Define the Scheduled Task
 
-Open the scheduled task and configure as follows:
+Open up the Scheduled Task wizard and configure the tabs as follows:
 
 ##### General tab 
     Action: Create
@@ -122,4 +118,11 @@ Deploy-Agent
         - Start in(optional): C:\
 <p align = "center"> 
      <img src= "Pictures\ST-Actions.jpg">
-</p
+</p>
+
+# Apply the Group Policy Object 
+    
+On the Group Policy Management Console, you need to right-click on the desired Organizational Unit and select the option to link an existent GPO. Choose the Group Policy Object defined in the Scheduled Task. After 10 or 20 minutes, the Group Policy Object will be replicated to the respective domain controllers. 
+    
+After you have successfully installed the agent and configure it to connect to Azure Arc-enabled servers, go to the Azure portal to verify that the servers in your Organizational Unit have successfully connected. View your machines in <a href = "https://aka.ms/hybridmachineportal">the Azure portal</a>.
+    
